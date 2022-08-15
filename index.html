@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Session-61</title>
+    <link href="src/main.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="src/images/divar.svg" width="50px" />
+        </div>
+        <div>
+            <i class="fa fa-map-marker"></i>
+            &nbsp;
+            <span>تهران</span>
+        </div>
+        <input type="button" onclick="openNewAdsBox()" id="add-btn" class="btn btn-red float-left" value="ثبت آگهی" />
+    </header>
+
+    <aside>
+        <nav>
+            <ul>
+                <li>
+                    <i class="fa fa-home"></i>
+                    <b>املاک</b>
+                </li>
+                <li class="nav-item">
+                    <a onclick="changeFilter(this,'adsType','buy')">
+                        <span>فروش مسکونی</span>
+                    </a>
+                    <br />
+                    <br />
+                    <a onclick="changeFilter(this,'adsType','rent')">
+                        <span>رهن و اجاره</span>
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-key"></i>
+                    <b>نوع آپارتمان</b>
+                </li>
+                <li class="nav-item">
+                    <a onclick="changeFilter(this,'houseType','apartment')">
+                        <span>آپارتمان</span>
+                    </a>
+                    <br />
+                    <br />
+                    <a onclick="changeFilter(this,'houseType','house')">
+                        <span>خانه و ویلا</span>
+                    </a>
+                </li>
+            </ul>
+            <hr />
+            <div class="search-item">
+                <b>محل</b>
+                <br />
+                <select class="locations" onchange="changeFilter(this,'location','')">
+                    <option value="0" disabled selected>تعیین محل</option>
+                </select>
+            </div>
+            <hr />
+            <div class="search-item">
+                <b>قیمت</b>
+                <br />
+                <input type="number" placeholder="حداقل" / onkeyup="changeFilter(this,'price','')">
+                <br />
+                <input type="number" placeholder="حداکثر"/ onkeyup="changeFilter(this,'price','')">
+            </div>
+            <hr />
+            <div class="search-item">
+                <b>متراژ</b>
+                <br />
+                <input type="number" placeholder="از"/ onkeyup="changeFilter(this,'area','')">
+                <br />
+                <input type="number" placeholder="تا"/ onkeyup="changeFilter(this,'area','')">
+            </div>
+            <div>
+                <input onclick="search()" type="button" class="btn btn-red w-100" value="جستجو" />
+            </div>
+        </nav>
+    </aside>
+
+    <main id="main-holder">
+
+    </main>
+
+    <section id="add-ads-holder">
+        <div id="add-ads-box">
+            <h1>درج آگهی املاک جدید
+                <a class="float-left cursor-pointer" onclick="closeNewAdsBox()">
+                    <i class="fa fa-window-close color-red"></i>
+                </a>
+            </h1>
+            <div id="inner-box">
+                <form id="add-form">
+                    <div class="form-item">
+                        <b>عنوان آگهی</b>
+                        <br />
+                        <input name="title" type="text" required />
+                    </div>
+                    <div class="form-item">
+                        <b>آژانس املاکی</b>
+                        <br />
+                        <input name="agency" type="text" required />
+                    </div>
+                    <div class="form-item">
+                        <b>آدرس تصویر</b>
+                        <br />
+                        <input name="image" type="url" required />
+                    </div>
+                    <div class="form-item">
+                        <b>نوع آگهی</b>
+                        <br />
+                        <input id="buy" type="radio" value="buy" name="adsType" checked />
+                        <label for="buy">فروش مسکونی</label>
+                        &nbsp;
+                        <input id="rent" type="radio" value="rent" name="adsType" />
+                        <label for="rent">رهن و اجاره</label>
+                    </div>
+                    <div class="form-item">
+                        <b>نوع ملک</b>
+                        <br />
+                        <input id="apartment" type="radio" value="apartment" name="houseType" checked />
+                        <label for="apartment">آپارتمان</label>
+                        &nbsp;
+                        <input id="house" type="radio" value="house" name="houseType" />
+                        <label for="house">خانه و ویلا</label>
+                    </div>
+                    <div class="form-item">
+                        <b>محل</b>
+                        <br />
+                        <select class="locations" name="location" required>
+                            <option value="0" disabled selected>تعیین محل</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <b>قیمت</b>
+                        <br />
+                        <input name="price" type="number" required />
+                    </div>
+                    <div class="form-item">
+                        <b>متراژ</b>
+                        <br />
+                        <input name="area" type="number" required />
+                    </div>
+                    <div class="form-item">
+                        <b>تعداد اتاق</b>
+                        <br />
+                        <input name="roomCount" type="number" required />
+                    </div>
+                    <div class="form-item">
+                        <b>سال ساخت</b>
+                        <br />
+                        <input name="year" type="number" required />
+                    </div>
+                    <div class="form-item">
+                        <b>طبقه</b>
+                        <br />
+                        <input name="floor" type="number" required />
+                    </div>
+                    <div class="form-item">
+                        <b>انباری</b>
+                        <br />
+                        <input id="warehouse1" type="radio" value="true" name="warehouse" checked />
+                        <label for="warehouse1">دارد</label>
+                        &nbsp;
+                        <input id="warehouse0" type="radio" value="false" name="warehouse" />
+                        <label for="warehouse0">ندارد</label>
+                    </div>
+
+                    <div class="form-item">
+                        <b>آسانسور</b>
+                        <br />
+                        <input id="elevator1" type="radio" value="true" name="elevator" checked />
+                        <label for="elevator1">دارد</label>
+                        &nbsp;
+                        <input id="elevator0" type="radio" value="false" name="elevator" />
+                        <label for="elevator0">ندارد</label>
+                    </div>
+
+                    <div class="form-item">
+                        <b>پارکینگ</b>
+                        <br />
+                        <input id="parking1" type="radio" value="true" name="parking" checked />
+                        <label for="parking1">دارد</label>
+                        &nbsp;
+                        <input id="parking0" type="radio" value="false" name="parking" />
+                        <label for="parking0">ندارد</label>
+                    </div>
+                    <div class="form-item">
+                        <input type="button" onclick="createNewAds()" class="btn btn-red float-left" value="درج آگهی" />
+                        <input type="reset" onclick="closeNewAdsBox()" class="btn btn-white float-left mg-l-10"
+                            value="انصراف" />
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="ads-item-template">
+        <a href="#">
+            <div class="ads-item">
+                <div class="ads-item-info">
+                    <h3>__TITLE__</h3>
+                    <div class="bottom-info">
+                        <b>__PRICE__ تومان</b>
+                        <br />
+                        <br />
+                        <span>__AGENCY__</span>
+                    </div>
+                </div>
+                <div class="ads-item-image">
+                    <img src="__IMG__" width="100%" />
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script src="models/House.js"></script>
+    <script src="data/HouseHandler.js"></script>
+    <script src="src/main.js"></script>
+</body>
+</html>
